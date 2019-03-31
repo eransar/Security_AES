@@ -3,31 +3,49 @@ import java.util.List;
 
 public class AESEncryption {
 
-    private byte[] k;
+    private byte[][] k;
 
     private List<byte[][]> message;
+    private List<byte[][]> encrypted_content;
 
 
 
 
-    public AESEncryption(byte[] k ,List<byte[][]> message) {
+    public AESEncryption(byte[][] k ,List<byte[][]> message) {
         message=new ArrayList<byte[][]>();
         this.message=message;
-        k = new byte[128];
         this.k=k;
 
 
+    }
+    public List<byte[][]>  init(){
+        shiftRows();
+        roundKey();
+        return encrypted_content;
     }
 
     private void shiftRows() {
         for (int i = 0; i <message.size() ; i++) {
             for (int j = 0; j <message.get(0).length ; j++) {
-                shift(j,message.get(i)[j]);
+                message.get(i)[j]=shift(j,message.get(i)[j]);
             }
         }
     }
 
-    private void roundKey(){}
+    private void roundKey(){
+        List<byte[][]> cypher = new ArrayList<byte[][]>();
+
+        for (int i = 0; i <k.length ; i++) {
+            byte[][] roundKey = new byte[4][4];
+            for (int j = 0; j <k[0].length ; j++) {
+                for (int l = 0; l <message.get(i)[j].length ; l++) {
+                     roundKey[i][j] = (byte)(message.get(i)[j][l] ^ k[i][j]);
+                }
+            }
+            cypher.add(roundKey);
+        }
+        this.encrypted_content=cypher;
+    }
 
 
 
