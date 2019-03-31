@@ -10,8 +10,8 @@ import java.util.List;
 public class Main {
 
     public static void main (String[] args)  {
-        Path k = Paths.get("C:\\Users\\eransar\\IdeaProjects\\SecurityAES3decrypt\\Resources\\key_short");
-        Path m = Paths.get("C:\\Users\\eransar\\IdeaProjects\\SecurityAES3decrypt\\Resources\\message_long");
+        Path k = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\key_short");
+        Path m = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\message_long");
         byte[][] key = new byte[4][4];
         List<byte[][]> msglist = new ArrayList<byte[][]>();
         List<byte[][]> keylist = new ArrayList<byte[][]>();
@@ -28,8 +28,6 @@ public class Main {
         tolist(keybyte,keylist);
         tolist(msgbyte,msglist);
 
-
-            key=key;
         } catch (IOException e) {
             System.out.println(e);
         }
