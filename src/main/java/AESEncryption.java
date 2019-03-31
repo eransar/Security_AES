@@ -12,7 +12,7 @@ public class AESEncryption {
 
 
     public AESEncryption(byte[][] k ,List<byte[][]> message) {
-        message=new ArrayList<byte[][]>();
+
         this.message=message;
         this.k=k;
 
