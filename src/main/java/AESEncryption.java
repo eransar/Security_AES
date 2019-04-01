@@ -44,16 +44,6 @@ public class AESEncryption {
             }
             cypher.add(roundKey);
         }
-
-        /*for (int i = 0; i <k.length ; i++) {
-            byte[][] roundKey = new byte[4][4];
-            for (int j = 0; j <k[0].length ; j++) {
-                for (int l = 0; l <message.get(i)[j].length ; l++) {
-                     roundKey[i][j] = (byte)(message.get(i)[j][l] ^ k[i][j]);
-                }
-            }
-            cypher.add(roundKey);
-        }*/
         this.encrypted_content=cypher;
     }
 

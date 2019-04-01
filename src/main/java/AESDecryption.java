@@ -30,11 +30,11 @@ public class AESDecryption {
     private void roundKey(){
         List<byte[][]> cypher = new ArrayList<byte[][]>();
 
-        for (int i = 0; i <k.length ; i++) {
+        for (int i = 0; i <cipher.size() ; i++) {
             byte[][] roundKey = new byte[4][4];
-            for (int j = 0; j <k[0].length ; j++) {
-                for (int l = 0; l < cipher.get(i)[j].length ; l++) {
-                    roundKey[i][j] = (byte)(cipher.get(i)[j][l] ^ k[i][j]);
+            for (int j = 0; j < cipher.get(0).length; j++) {
+                for (int l = 0; l < cipher.get(0)[0].length; l++) {
+                    roundKey[j][l] = (byte) (cipher.get(i)[j][l] ^ k[j][l]);
                 }
             }
             cypher.add(roundKey);
