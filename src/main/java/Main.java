@@ -15,13 +15,18 @@ public class Main {
         Path m = Paths.get(fh.open_file("key_long").getAbsolutePath());
 //        Path k = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\key_short");
 //        Path m = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\message_long");
+//        Path cipherFile = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\cipher_short");
         byte[][] key = new byte[4][4];
         List<byte[][]> msglist = new ArrayList<byte[][]>();
         List<byte[][]> keylist = new ArrayList<byte[][]>();
+        List<byte[][]> ciflist = new ArrayList<byte[][]>();
+
 
         try {
             byte[] keybyte = Files.readAllBytes(k);
             byte[] msgbyte = Files.readAllBytes(m);
+            //byte[] cifbyte = Files.readAllBytes(cipherFile);
+
 //            for (int i = 0; i <key.length ; i++) {
 //                for (int j = 0; j <key[0].length ; j++) {
 //                    key[i][j]=keybyte[i*4+j];
@@ -30,6 +35,7 @@ public class Main {
 //            }
         tolist(keybyte,keylist);
         tolist(msgbyte,msglist);
+        //tolist(cifbyte,ciflist);
 
         } catch (IOException e) {
             System.out.println(e);
@@ -42,7 +48,23 @@ public class Main {
         List<byte[][]> c = e1.init();
 
 
+        //AESDecryption d1 = new AESDecryption(keylist.get(2),c);
+        //        List<byte[][]> m3 = d1.init();
+        //        d1 = new AESDecryption(keylist.get(1),m3);
+        //        List<byte[][]> m2 = d1.init();
+        //        d1 = new AESDecryption(keylist.get(0),m2);
+        //        List<byte[][]> m1 = d1.init();
+
     }
+
+//    public static void comp1(List<byte[][]> list1,List<byte[][]> list2){
+//
+//        for (int i = 0; i <list1.size() ; i++) {
+//            if(Arrays.deepEquals(list1.get(i), list2.get(i)))
+//                System.out.println("true");
+//            else
+//                System.out.println("false");
+//        }
 
     public static List<byte[][]> tolist(byte[] data, List<byte[][]> list){
         int counter =0;

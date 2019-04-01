@@ -35,7 +35,17 @@ public class AESEncryption {
     private void roundKey(){
         List<byte[][]> cypher = new ArrayList<byte[][]>();
 
-        for (int i = 0; i <k.length ; i++) {
+        for (int i = 0; i <message.size() ; i++) {
+            byte[][] roundKey = new byte[4][4];
+            for (int j = 0; j <message.get(0).length ; j++) {
+                for (int l = 0; l <message.get(0)[0].length ; l++) {
+                    roundKey[j][l]=(byte)(message.get(i)[j][l] ^ k[j][l]);
+                }
+            }
+            cypher.add(roundKey);
+        }
+
+        /*for (int i = 0; i <k.length ; i++) {
             byte[][] roundKey = new byte[4][4];
             for (int j = 0; j <k[0].length ; j++) {
                 for (int l = 0; l <message.get(i)[j].length ; l++) {
@@ -43,7 +53,7 @@ public class AESEncryption {
                 }
             }
             cypher.add(roundKey);
-        }
+        }*/
         this.encrypted_content=cypher;
     }
 
