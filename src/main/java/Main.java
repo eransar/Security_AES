@@ -9,9 +9,12 @@ import java.util.List;
 
 public class Main {
 
-    public static void main (String[] args)  {
-        Path k = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\key_short");
-        Path m = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\message_long");
+    public static void main (String[] args) throws URISyntaxException {
+        FileHandler fh = new FileHandler();
+        Path k = Paths.get(fh.open_file("key_short").getAbsolutePath());
+        Path m = Paths.get(fh.open_file("key_long").getAbsolutePath());
+//        Path k = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\key_short");
+//        Path m = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\message_long");
         byte[][] key = new byte[4][4];
         List<byte[][]> msglist = new ArrayList<byte[][]>();
         List<byte[][]> keylist = new ArrayList<byte[][]>();
