@@ -14,15 +14,15 @@ public class AESDecryption {
     }
 
     public List<byte[][]>  init(){
-        shiftRows();
         roundKey();
+        shiftRows();
         return decrypted_content;
     }
 
     private void shiftRows() {
-        for (int i = 0; i < cipher.size() ; i++) {
-            for (int j = 0; j < cipher.get(0).length ; j++) {
-                cipher.get(i)[j]=shift(j, cipher.get(i)[j]);
+        for (int i = 0; i < decrypted_content.size() ; i++) {
+            for (int j = 0; j < decrypted_content.get(0).length ; j++) {
+                decrypted_content.get(i)[j]=shift(j, decrypted_content.get(i)[j]);
             }
         }
     }

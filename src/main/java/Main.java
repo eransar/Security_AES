@@ -12,11 +12,12 @@ public class Main {
 
     public static void main(String[] args) throws URISyntaxException {
         FileHandler fh = new FileHandler();
-        Path k = Paths.get(fh.open_file("key_short").getAbsolutePath());
-        Path m = Paths.get(fh.open_file("message_short").getAbsolutePath());
+        Path k = Paths.get(fh.open_file("key_long").getAbsolutePath());
+        Path m = Paths.get(fh.open_file("message_long").getAbsolutePath());
+        Path cipherFile = Paths.get(fh.open_file("cipher_long").getAbsolutePath());
+
 //        Path k = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\key_short");
 //        Path m = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\message_long");
-        Path cipherFile = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\src\\main\\java\\Resources\\cipher_short");
         byte[][] key = new byte[4][4];
         List<byte[][]> msglist = new ArrayList<byte[][]>();
         List<byte[][]> keylist = new ArrayList<byte[][]>();
@@ -36,22 +37,22 @@ public class Main {
             System.out.println(e);
         }
 
-        AESEncryption e1 = new AESEncryption(keylist.get(0), msglist);
-        List<byte[][]> c1 = e1.init();
-        e1 = new AESEncryption(keylist.get(1), c1);
-        List<byte[][]> c2 = e1.init();
-        e1 = new AESEncryption(keylist.get(2), c2);
-        List<byte[][]> c = e1.init();
+//        AESEncryption e1 = new AESEncryption(keylist.get(0), msglist);
+//        List<byte[][]> c1 = e1.init();
+//        e1 = new AESEncryption(keylist.get(1), c1);
+//        List<byte[][]> c2 = e1.init();
+//        e1 = new AESEncryption(keylist.get(2), c2);
+//        List<byte[][]> c = e1.init();
 
-        comp1(c, ciflist);
+        //comp1(c, ciflist);
 
-        //AESDecryption d1 = new AESDecryption(keylist.get(2),c);
-        //        List<byte[][]> m3 = d1.init();
-        //        d1 = new AESDecryption(keylist.get(1),m3);
-        //        List<byte[][]> m2 = d1.init();
-        //        d1 = new AESDecryption(keylist.get(0),m2);
-        //        List<byte[][]> m1 = d1.init();
-
+        AESDecryption d1 = new AESDecryption(keylist.get(2),ciflist);
+                List<byte[][]> m3 = d1.init();
+                d1 = new AESDecryption(keylist.get(1),m3);
+                List<byte[][]> m2 = d1.init();
+                d1 = new AESDecryption(keylist.get(0),m2);
+                List<byte[][]> m1 = d1.init();
+        comp1(m1,msglist);
     }
 
     public static void comp1(List<byte[][]> list1, List<byte[][]> list2) {
