@@ -6,7 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class Main {
 
@@ -46,13 +49,27 @@ public class Main {
 
         //comp1(c, ciflist);
 
-        AESDecryption d1 = new AESDecryption(keylist.get(2),ciflist);
-                List<byte[][]> m3 = d1.init();
-                d1 = new AESDecryption(keylist.get(1),m3);
-                List<byte[][]> m2 = d1.init();
-                d1 = new AESDecryption(keylist.get(0),m2);
-                List<byte[][]> m1 = d1.init();
-        comp1(m1,msglist);
+//        AESDecryption d1 = new AESDecryption(keylist.get(2),ciflist);
+//                List<byte[][]> m3 = d1.init();
+//                d1 = new AESDecryption(keylist.get(1),m3);
+//                List<byte[][]> m2 = d1.init();
+//                d1 = new AESDecryption(keylist.get(0),m2);
+//                List<byte[][]> m1 = d1.init();
+//        comp1(m1,msglist);
+
+        List<byte[][]> msglist1 = new ArrayList<>(msglist);
+
+        List<byte[][]> ciferlist1 = new ArrayList<>(ciflist);
+
+        Hack hack = new Hack(msglist1,ciferlist1);
+        List<byte[][]> keys1 = hack.init();
+        AESEncryption e1 = new AESEncryption(keys1.get(0), msglist);
+        List<byte[][]> c1 = e1.init();
+        e1 = new AESEncryption(keylist.get(1), c1);
+        List<byte[][]> c2 = e1.init();
+        e1 = new AESEncryption(keylist.get(2), c2);
+        List<byte[][]> c = e1.init();
+        comp1(ciflist,c);
     }
 
     public static void comp1(List<byte[][]> list1, List<byte[][]> list2) {
