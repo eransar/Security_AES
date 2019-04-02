@@ -1,15 +1,12 @@
 import java.io.*;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 public class Main {
 
@@ -46,8 +43,8 @@ public class Main {
 //        List<byte[][]> c2 = e1.init();
 //        e1 = new AESEncryption(keylist.get(2), c2);
 //        List<byte[][]> c = e1.init();
-
-        //comp1(c, ciflist);
+//
+//        comp1(c, ciflist);
 
 //        AESDecryption d1 = new AESDecryption(keylist.get(2),ciflist);
 //                List<byte[][]> m3 = d1.init();
@@ -57,19 +54,35 @@ public class Main {
 //                List<byte[][]> m1 = d1.init();
 //        comp1(m1,msglist);
 
-        List<byte[][]> msglist1 = new ArrayList<>(msglist);
-
+        List<byte[][]> msglist1 = new ArrayList<>();
+        for(byte[][] p : msglist) {
+            msglist1.add(p.clone());
+        }
         List<byte[][]> ciferlist1 = new ArrayList<>(ciflist);
-
+        for(byte[][] p : ciflist) {
+            ciferlist1.add(p.clone());
+        }
         Hack hack = new Hack(msglist1,ciferlist1);
         List<byte[][]> keys1 = hack.init();
+        //keys1.set(2,transpose(keys1.get(2)));
         AESEncryption e1 = new AESEncryption(keys1.get(0), msglist);
         List<byte[][]> c1 = e1.init();
-        e1 = new AESEncryption(keylist.get(1), c1);
+        e1 = new AESEncryption(keys1.get(1), c1);
         List<byte[][]> c2 = e1.init();
-        e1 = new AESEncryption(keylist.get(2), c2);
+        e1 = new AESEncryption(keys1.get(2), c2);
         List<byte[][]> c = e1.init();
+
         comp1(ciflist,c);
+    }
+
+    private static byte[][] transpose(byte[][] bytes) {
+        byte[][] bytes1 = new byte[4][4];
+            for (int j = 0; j < bytes.length; j++) {
+                for (int k = 0; k < bytes[j].length; k++) {
+                    bytes1[j][k] = bytes[k][j];
+                }
+            }
+            return bytes1;
     }
 
     public static void comp1(List<byte[][]> list1, List<byte[][]> list2) {
@@ -81,6 +94,21 @@ public class Main {
                 System.out.println("false");
         }
     }
+
+    public void writeTO(List<byte[][]> bytes) throws IOException {
+        FileOutputStream out = null;
+        for (int i = 0; i < bytes.size(); i++) {
+            for (int j = 0; j < bytes.get(i).length; j++) {
+                for (int k = 0; k < bytes.get(i)[j].length; k++) {
+                    out = new FileOutputStream("the-file-name");
+                    out.write(bytes.get(i)[j][k]);
+                }
+            }
+
+        }
+        out.close();
+    }
+
 
     public static List<byte[][]> tolist(byte[] data, List<byte[][]> list) {
         int counter = 0;

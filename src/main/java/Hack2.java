@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Hack {
+public class Hack2 {
     private List<byte[][]> msg;
     private List<byte[][]> cipher;
     private List<byte[][]> keys;
 
-    public Hack(List<byte[][]> msg, List<byte[][]> cipher) {
+    public Hack2(List<byte[][]> msg, List<byte[][]> cipher) {
         this.msg = msg;
         this.cipher = cipher;
         keys = new ArrayList<>();
@@ -22,18 +22,6 @@ public class Hack {
         return getKeys();
     }
 
-    private void hackByRandomKeys() {
-//        keys.add(randomKey());
-//        keys.add(randomKey());
-        keys.add(new byte[][] {{127,127,127,127},{127,127,127,127},{127,127,127,127},{127,127,127,127}});
-        keys.add(new byte[][] {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}});
-        AESEncryption aesEncryption = new AESEncryption(keys.get(0),msg);
-        List<byte[][]> m3 = aesEncryption.init();
-        aesEncryption = new AESEncryption(keys.get(1), m3);
-        List<byte[][]> m2 = aesEncryption.init();
-        generateKey(m2);
-    }
-
     private byte[][] randomKey() {
         Random randomno = new Random();
         byte[][] key_array = new byte[4][4];
@@ -43,9 +31,11 @@ public class Hack {
         return key_array;
     }
 
-    private void generateKey(List<byte[][]> cifer2) {
-        shiftRows(cifer2);
-        desifer(cifer2);
+    private void hackByRandomKeys() {
+        keys.add(randomKey());
+        List<byte[][]> keys1 = new ArrayList<>(keys);
+        keys.add(shiftRows(keys1).get(0));
+        desifer(shiftRows(shiftRows(shiftRows(msg))));
     }
 
     private void desifer(List<byte[][]> cifer2) {
@@ -58,12 +48,13 @@ public class Hack {
         keys.add(roundKey);
     }
 
-    private void shiftRows(List<byte[][]> message) {
-        for (int i = 0; i < message.size(); i++) {
-            for (int j = 0; j < message.get(0).length; j++) {
-                message.get(i)[j] = shift(j, message.get(i)[j]);
+    private List<byte[][]> shiftRows(List<byte[][]> keyNumber) {
+        for (int i = 0; i < keyNumber.size(); i++) {
+            for (int j = 0; j < keyNumber.get(0).length; j++) {
+                keyNumber.get(i)[j] = shift(j, keyNumber.get(i)[j]);
             }
         }
+        return keyNumber;
     }
 
     private byte[] shift(int i, byte[] bytes) {
@@ -94,6 +85,4 @@ public class Hack {
 
         return tmp;
     }
-
-
 }
