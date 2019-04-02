@@ -16,9 +16,6 @@ public class Main {
         Path m = Paths.get(fh.open_file("message_long").getAbsolutePath());
         Path cipherFile = Paths.get(fh.open_file("cipher_long").getAbsolutePath());
 
-//        Path k = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\key_short");
-//        Path m = Paths.get("C:\\Users\\idanf\\IdeaProjects\\Security_AES\\Resources\\message_long");
-        byte[][] key = new byte[4][4];
         List<byte[][]> msglist = new ArrayList<byte[][]>();
         List<byte[][]> keylist = new ArrayList<byte[][]>();
         List<byte[][]> ciflist = new ArrayList<byte[][]>();
@@ -37,6 +34,9 @@ public class Main {
             System.out.println(e);
         }
 
+        /**
+         * run AESEncryption
+         */
 //        AESEncryption e1 = new AESEncryption(keylist.get(0), msglist);
 //        List<byte[][]> c1 = e1.init();
 //        e1 = new AESEncryption(keylist.get(1), c1);
@@ -45,7 +45,9 @@ public class Main {
 //        List<byte[][]> c = e1.init();
 //
 //        comp1(c, ciflist);
-
+        /**
+         * run AESDecryption
+         */
 //        AESDecryption d1 = new AESDecryption(keylist.get(2),ciflist);
 //                List<byte[][]> m3 = d1.init();
 //                d1 = new AESDecryption(keylist.get(1),m3);
@@ -54,6 +56,10 @@ public class Main {
 //                List<byte[][]> m1 = d1.init();
 //        comp1(m1,msglist);
 
+
+        /**
+         * run break
+         */
         List<byte[][]> msglist1 = new ArrayList<>();
         for(byte[][] p : msglist) {
             msglist1.add(p.clone());

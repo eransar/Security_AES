@@ -23,10 +23,10 @@ public class Hack {
     }
 
     private void hackByRandomKeys() {
-//        keys.add(randomKey());
-//        keys.add(randomKey());
-        keys.add(new byte[][] {{127,127,127,127},{127,127,127,127},{127,127,127,127},{127,127,127,127}});
-        keys.add(new byte[][] {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}});
+        keys.add(randomKey());
+        keys.add(randomKey());
+        //keys.add(new byte[][] {{127,127,127,127},{127,127,127,127},{127,127,127,127},{127,127,127,127}});
+        //keys.add(new byte[][] {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}});
         AESEncryption aesEncryption = new AESEncryption(keys.get(0),msg);
         List<byte[][]> m3 = aesEncryption.init();
         aesEncryption = new AESEncryption(keys.get(1), m3);
