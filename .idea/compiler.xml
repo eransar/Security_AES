@@ -10,8 +10,5 @@
         <module name="SecurityAES3decrypt" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Security_AES" target="7" />
-    </bytecodeTargetLevel>
   </component>
 </project>
