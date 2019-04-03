@@ -115,13 +115,13 @@ public class CLI {
                     }
                     writeTO(keys1,line.getOptionValue("o"));
                 } catch (IOException e) {
-                    e.printStackTrace();
+
                 }
             } // break
 
 
         } catch (ParseException | IOException e) {
-            e.printStackTrace();
+
         }
     }
 
