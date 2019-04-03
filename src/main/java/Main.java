@@ -1,4 +1,5 @@
 import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,16 +62,38 @@ public class Main {
          * run break
          */
         List<byte[][]> msglist1 = new ArrayList<>();
-        for(byte[][] p : msglist) {
+        for (byte[][] p : msglist) {
             msglist1.add(p.clone());
         }
         List<byte[][]> ciferlist1 = new ArrayList<>(ciflist);
-        for(byte[][] p : ciflist) {
+        for (byte[][] p : ciflist) {
             ciferlist1.add(p.clone());
         }
-        Hack hack = new Hack(msglist1,ciferlist1);
+        Hack hack = new Hack(msglist1, ciferlist1);
         List<byte[][]> keys1 = hack.init();
-        //keys1.set(2,transpose(keys1.get(2)));
+        for (int i = 0; i <keys1.size() ; i++) {
+            System.out.println(Arrays.deepToString(keys1.get(i)));
+            System.out.println();
+        }
+        try {
+            for (int i = 0; i <keys1.size() ; i++) {
+                keys1.set(i,transpose(keys1.get(i)));
+            }
+            writeTO(keys1,"D:\\key1.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            keys1.clear();
+            readTO("D:\\key1.txt",keys1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i <keys1.size() ; i++) {
+            System.out.println(Arrays.deepToString(keys1.get(i)));
+            System.out.println();
+        }
         AESEncryption e1 = new AESEncryption(keys1.get(0), msglist);
         List<byte[][]> c1 = e1.init();
         e1 = new AESEncryption(keys1.get(1), c1);
@@ -78,17 +101,17 @@ public class Main {
         e1 = new AESEncryption(keys1.get(2), c2);
         List<byte[][]> c = e1.init();
 
-        comp1(ciflist,c);
+        comp1(ciflist, c);
     }
 
     private static byte[][] transpose(byte[][] bytes) {
         byte[][] bytes1 = new byte[4][4];
-            for (int j = 0; j < bytes.length; j++) {
-                for (int k = 0; k < bytes[j].length; k++) {
-                    bytes1[j][k] = bytes[k][j];
-                }
+        for (int j = 0; j < bytes.length; j++) {
+            for (int k = 0; k < bytes[j].length; k++) {
+                bytes1[j][k] = bytes[k][j];
             }
-            return bytes1;
+        }
+        return bytes1;
     }
 
     public static void comp1(List<byte[][]> list1, List<byte[][]> list2) {
@@ -101,18 +124,24 @@ public class Main {
         }
     }
 
-    public void writeTO(List<byte[][]> bytes) throws IOException {
-        FileOutputStream out = null;
+    public static void writeTO(List<byte[][]> bytes,String path) throws IOException {
+        File f = new File(path);
+        FileOutputStream out = out = new FileOutputStream(f);
         for (int i = 0; i < bytes.size(); i++) {
             for (int j = 0; j < bytes.get(i).length; j++) {
                 for (int k = 0; k < bytes.get(i)[j].length; k++) {
-                    out = new FileOutputStream("the-file-name");
                     out.write(bytes.get(i)[j][k]);
                 }
             }
 
         }
         out.close();
+    }
+
+    public static void readTO(String path,List<byte[][]> list) throws URISyntaxException, IOException {
+        Path p = Paths.get(new File(path).toURI());
+        byte[] keyFIle = Files.readAllBytes(p);
+        tolist(keyFIle,list);
     }
 
 
