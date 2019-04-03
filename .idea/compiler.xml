@@ -6,9 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Security_AES" />
+        <module name="1" />
         <module name="SecurityAES3decrypt" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="1" target="7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -15,10 +15,6 @@ public class CLI {
 
 
     public static void main(String[] args) throws ParseException, URISyntaxException, IOException {
-        FileHandler fh = new FileHandler();
-        Path m = Paths.get(fh.open_file("cipher_short").getAbsolutePath());
-        List<byte[][]> message_check = new ArrayList<byte[][]>();
-        tolist(Files.readAllBytes(m),message_check);
         CommandLineParser parser = new DefaultParser();
         Options options = new Options();
         options.addOption("e", false, "instruct the program to encrypt the file");
